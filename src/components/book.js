@@ -42,6 +42,11 @@ function Book(props) {
           Review: {review ? review : "No review saved."}
         </div>
         <img src={coverImage} alt="remains of the day cover" width="50" />
+        <div className="book__date">
+          Book added:
+          {Date.now()}
+        </div>
+
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       </div>
       <div>
