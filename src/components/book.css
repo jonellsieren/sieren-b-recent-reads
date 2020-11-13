@@ -1,0 +1,58 @@
+.book {
+  padding: 1rem;
+  width: 300px;
+  min-height: 175px;
+  background-color: #fff;
+  color: #151116;
+  border-radius: 10px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.book__button {
+  display: block;
+  padding: 0.25rem;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  color: #151116;
+  transition: all 0.15s;
+  outline: none;
+}
+
+.book__button:disabled {
+  opacity: 0.6;
+}
+
+.book__button:focus {
+  color: white;
+  background-color: #151116;
+}
+
+.book__button:hover {
+  color: white;
+  background-color: #151116;
+}
+
+.book__button:active {
+  color: white;
+  background-color: #151116;
+}
+
+.book__button svg {
+  font-size: 1.25rem;
+}
+
+.book > * {
+  margin-bottom: 0.25rem;
+}
+
+.book__title {
+  font-weight: bold;
+}
+
+.book__year {
+  font-style: italic;
+}

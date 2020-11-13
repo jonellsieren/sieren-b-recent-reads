@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import AddMoviePage from "../pages/add-book-page";
-import EditMoviePage from "../pages/edit-book-page";
-import MoviesPage from "../pages/books-page";
+import AddBookPage from "../pages/add-book-page";
+import EditBookPage from "../pages/edit-book-page";
+import BooksPage from "../pages/books-page";
 import NotFoundPage from "../pages/not-found-page";
 import Nav from "./nav";
 
@@ -13,15 +13,15 @@ function App() {
 
       <Switch>
         <Route path="/" exact>
-          <MoviesPage />
+          <BooksPage />
         </Route>
 
         <Route path="/add">
-          <AddMoviePage />
+          <AddBookPage />
         </Route>
 
         <Route path="/edit/:id">
-          <EditMoviePage />
+          <EditBookPage />
         </Route>
 
         <Route path="*">
