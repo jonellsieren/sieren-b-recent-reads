@@ -7,9 +7,8 @@ function BookForm(props) {
 
   if (initialState.title === undefined) initialState.title = "";
   if (initialState.author === undefined) initialState.author = "";
-  if (initialState.yearPublished === undefined)
-    initialState.yearPublished = 2020;
-  if (initialState.rating === undefined) initialState.rating = 3;
+  if (initialState.yearPublished === undefined) initialState.yearPublished = "";
+  if (initialState.rating === undefined) initialState.rating = "";
   if (initialState.purchaseLink === undefined) initialState.purchaseLink = "";
   if (initialState.review === undefined) initialState.review = "";
 
@@ -20,7 +19,7 @@ function BookForm(props) {
   );
   const [rating, setRating] = useState(initialState.rating);
   const [purchaseLink, setPurchaseLink] = useState(initialState.purchaseLink);
-  const [preview, setReview] = useState(initialState.review);
+  const [review, setReview] = useState(initialState.review);
   const [errorMessage, setErrorMessage] = useState("");
 
   const onTitleChange = (event) => {
@@ -38,13 +37,13 @@ function BookForm(props) {
   const onPurchaseLinkChange = (event) => {
     setPurchaseLink(event.target.value);
   };
-  const onReview = (event) => {
+  const onReviewChange = (event) => {
     setReview(event.target.value);
   };
 
   const onBookSubmit = async (event) => {
     event.preventDefault();
-    onSubmit(title, rating, releaseYear);
+    onSubmit(title, author, yearPublished, rating, purchaseLink, review);
   };
 
   return (
@@ -60,6 +59,20 @@ function BookForm(props) {
           value={title}
           onChange={onTitleChange}
         />
+        <label className="book-form__label">Author:</label>
+        <input
+          className="book-form__input"
+          type="text"
+          value={author}
+          onChange={onAuthorChange}
+        />
+        <label className="book-form__label">Year Published:</label>
+        <input
+          className="book-form__input"
+          type="number"
+          value={yearPublished}
+          onChange={onYearPublishedChange}
+        />
         <label className="book-form__label">Rating:</label>
         <input
           className="book-form__input"
@@ -67,12 +80,19 @@ function BookForm(props) {
           value={rating}
           onChange={onRatingChange}
         />
-        <label className="book-form__label">Year Published:</label>
+        <label className="book-form__label">Purchase:</label>
         <input
           className="book-form__input"
-          type="number"
-          value={yearPublished}
-          onChange={onYearReleasedChange}
+          type="text"
+          value={purchaseLink}
+          onChange={onPurchaseLinkChange}
+        />
+        <label className="book-form__label">Review:</label>
+        <input
+          className="book-form__input"
+          type="text"
+          value={review}
+          onChange={onReviewChange}
         />
         <input
           className="book-form__submit"

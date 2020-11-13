@@ -9,7 +9,7 @@ function Book(props) {
   const { id, data } = props;
   const { title, author, yearPublished, rating, purchaseLink, review } = data;
 
-  const ratingString = "💜".repeat(rating) + "🖤".repeat(5 - rating);
+  const ratingString = "⚪️".repeat(rating) + "⚫️".repeat(5 - rating);
   const history = useHistory();
   const [isDeleting, setIsDeleting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import LoadingSpinner from "./loading-spinner";
 import ErrorMessage from "./error-message";
 import { booksCollection } from "../data/firebase";
-import Book from "./movie";
+import Book from "./book";
 import "./book-listing.css";
 
 function BookListing() {
-  const [movies, setBooks] = useState([]);
+  const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -23,7 +23,7 @@ function BookListing() {
       );
       console.error(error);
     };
-    const unsubscribe = moviesCollection
+    const unsubscribe = booksCollection
       .orderBy("rating", "desc")
       .onSnapshot(onNext, onError);
     return unsubscribe;

@@ -3,7 +3,7 @@ import "./edit-book.css";
 import ErrorMessage from "./error-message";
 import LoadingSpinner from "./loading-spinner";
 import BookForm from "./book-form";
-import { booksCollection } from ".data/firebase";
+import { booksCollection } from "../data/firebase";
 
 function EditBook(props) {
   const { id } = props;
@@ -21,9 +21,9 @@ function EditBook(props) {
         const bookSnapshot = await booksCollection.doc(id).get();
 
         if (!bookSnapshot.exists) {
-          throw new Error("No such movie exists!");
+          throw new Error("No such book exists!");
         }
-        const data = movieSnapshot.data();
+        const data = bookSnapshot.data();
         setBookData(data);
       } catch (error) {
         setErrorMessage("Something went wrong. Please try again");

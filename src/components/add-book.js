@@ -39,8 +39,8 @@ function AddBook() {
   };
   return (
     <div className="add-container">
-      <h1>Add Movie</h1>
-      <MovieForm
+      <h1>Add Book</h1>
+      <BookForm
         onSubmit={onBookSubmit}
         isSaving={isSaving}
         message={formMessage}
