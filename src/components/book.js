@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import ErrorMessage from "./error-message";
 import { booksCollection } from "../data/firebase";
 import "./book.css";
+import coverImage from "../images/book_sample.jpg";
 
 function Book(props) {
   const { id, data } = props;
@@ -31,13 +32,17 @@ function Book(props) {
     <div className="book">
       <div className="book__contents">
         <div className="book__title">{title}</div>
-        <div className="book__author">{author}</div>
-        <div className="book__year">{yearPublished}</div>
-        <div className="book__rating">{ratingString}</div>
-        <div className="book__purchase">{purchaseLink}</div>
+        <div className="book__author">by {author}</div>
+        <div className="book__year">Year:{yearPublished}</div>
+        <div className="book__rating">Rating:{ratingString}</div>
+        <div className="book__purchase">
+          <a href={purchaseLink}>Purchase Book</a>{" "}
+        </div>
         <div className="book__review">
+          Review:
           {review ? review : "No review saved."}
         </div>
+        <img src={coverImage} alt="remains of the day cover" width="50" />
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       </div>
       <div>

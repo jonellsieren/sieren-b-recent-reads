@@ -12,6 +12,7 @@
 }
 
 .book__button {
+  box-shadow: 0px 6px 4px -3px #070201;
   display: block;
   padding: 0.25rem;
   border-radius: 50%;
@@ -50,7 +51,7 @@
 }
 
 .book__title {
-  font-weight: bold;
+  color: purple;
 }
 
 .book__year {
