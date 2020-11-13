@@ -1,53 +1,62 @@
 import React, { useState, useEffect } from "react";
-import "./edit-movie.css";
+import "./edit-book.css";
 import ErrorMessage from "./error-message";
 import LoadingSpinner from "./loading-spinner";
-import MovieForm from "./book-form";
-import { moviesCollection } from "./firebase";
+import BookForm from "./book-form";
+import { booksCollection } from ".data/firebase";
 
-function EditMovie(props) {
+function EditBook(props) {
   const { id } = props;
 
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [movieData, setMovieData] = useState(null);
+  const [bookData, setBookData] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
   const [formMessage, setFormMessage] = useState("");
 
   useEffect(() => {
-    async function getMovie() {
+    async function getBook() {
       setIsLoading(true);
       try {
-        const movieSnapshot = await moviesCollection.doc(id).get();
+        const bookSnapshot = await booksCollection.doc(id).get();
 
-        if (!movieSnapshot.exists) {
+        if (!bookSnapshot.exists) {
           throw new Error("No such movie exists!");
         }
         const data = movieSnapshot.data();
-        setMovieData(data);
+        setBookData(data);
       } catch (error) {
         setErrorMessage("Something went wrong. Please try again");
         console.error(error);
       }
       setIsLoading(false);
     }
-    getMovie();
+    getBook();
   }, [id]);
 
-  const onMovieSubmit = async (title, rating, releaseYear) => {
-    // alert(`${title} ${rating} ${releaseYear}`);
+  const onBookSubmit = async (
+    title,
+    author,
+    yearPublished,
+    rating,
+    purchaseLink,
+    review
+  ) => {
     setIsSaving(true);
     setFormMessage("");
     try {
-      await moviesCollection.doc(id).set({
+      await booksCollection.doc(id).set({
         title,
+        author,
+        yearPublished,
         rating,
-        releaseYear,
+        purchaseLink,
+        review,
       });
       setFormMessage("Saved successfully!");
     } catch (error) {
       setFormMessage(
-        "Something went wrong editing this movie. Please try again."
+        "Something went wrong editing this book. Please try again."
       );
       console.error(error);
     }
@@ -56,7 +65,7 @@ function EditMovie(props) {
 
   return (
     <div className="edit-container">
-      <h2>Edit Movie</h2>
+      <h2>Edit Book</h2>
       {isLoading && (
         <LoadingSpinner
           size="50px"
@@ -67,10 +76,10 @@ function EditMovie(props) {
       {errorMessage && (
         <ErrorMessage displayAsCard>{errorMessage}</ErrorMessage>
       )}
-      {movieData && (
-        <MovieForm
-          initialState={movieData}
-          onSubmit={onMovieSubmit}
+      {bookData && (
+        <BookForm
+          initialState={bookData}
+          onSubmit={onBookSubmit}
           isSaving={isSaving}
           message={formMessage}
         />
@@ -79,4 +88,4 @@ function EditMovie(props) {
   );
 }
 
-export default EditMovie;
+export default EditBook;

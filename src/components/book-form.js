@@ -1,58 +1,81 @@
 import React, { useState } from "react";
 import ErrorMessage from "./error-message";
-import "./movie-form.css";
+import "./book-form.css";
 
-function MovieForm(props) {
+function BookForm(props) {
   const { initialState = {}, message, isSaving, onSubmit } = props;
 
   if (initialState.title === undefined) initialState.title = "";
+  if (initialState.author === undefined) initialState.author = "";
+  if (initialState.yearPublished === undefined)
+    initialState.yearPublished = 2020;
   if (initialState.rating === undefined) initialState.rating = 3;
-  if (initialState.releaseYear === undefined) initialState.releaseYear = 2020;
+  if (initialState.purchaseLink === undefined) initialState.purchaseLink = "";
+  if (initialState.review === undefined) initialState.review = "";
 
   const [title, setTitle] = useState(initialState.title);
+  const [author, setAuthor] = useState(initialState.author);
+  const [yearPublished, setYearPublished] = useState(
+    initialState.yearPublished
+  );
   const [rating, setRating] = useState(initialState.rating);
-  const [releaseYear, setReleaseYear] = useState(initialState.releaseYear);
+  const [purchaseLink, setPurchaseLink] = useState(initialState.purchaseLink);
+  const [preview, setReview] = useState(initialState.review);
   const [errorMessage, setErrorMessage] = useState("");
 
   const onTitleChange = (event) => {
     setTitle(event.target.value);
   };
+  const onAuthorChange = (event) => {
+    setAuthor(event.target.value);
+  };
+  const onYearPublishedChange = (event) => {
+    setYearPublished(event.target.value);
+  };
   const onRatingChange = (event) => {
     setRating(event.target.value);
   };
-  const onYearReleasedChange = (event) => {
-    setReleaseYear(event.target.value);
+  const onPurchaseLinkChange = (event) => {
+    setPurchaseLink(event.target.value);
+  };
+  const onReview = (event) => {
+    setReview(event.target.value);
   };
 
-  const onMovieSubmit = async (event) => {
+  const onBookSubmit = async (event) => {
     event.preventDefault();
     onSubmit(title, rating, releaseYear);
   };
 
   return (
-    <form className="movie-form" onSubmit={onMovieSubmit}>
-      <h2 className="movie-form__title">Movie Details</h2>
-      {message && <p className="movie-form__message">{message}</p>}
+    <form className="book-form" onSubmit={onBookSubmit}>
+      <h2 className="book-form__title">Book Details</h2>
+      {message && <p className="book-form__message">{message}</p>}
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-      <fieldset className="movie-form__controls" disabled={isSaving}>
-        <label className="movie-form__label">Movie Title:</label>
-        <input className="movie-form__input" type="text" value={title} onChange={onTitleChange} />
-        <label className="movie-form__label">Rating:</label>
+      <fieldset className="book-form__controls" disabled={isSaving}>
+        <label className="book-form__label">Book Title:</label>
         <input
-          className="movie-form__input"
+          className="book-form__input"
+          type="text"
+          value={title}
+          onChange={onTitleChange}
+        />
+        <label className="book-form__label">Rating:</label>
+        <input
+          className="book-form__input"
           type="number"
           value={rating}
           onChange={onRatingChange}
         />
-        <label className="movie-form__label">Year Released:</label>
+        <label className="book-form__label">Year Published:</label>
         <input
-          className="movie-form__input"
+          className="book-form__input"
           type="number"
-          value={releaseYear}
+          value={yearPublished}
           onChange={onYearReleasedChange}
         />
         <input
-          className="movie-form__submit"
+          className="book-form__submit"
           type="submit"
           value={isSaving ? "Saving..." : "Save"}
         />
@@ -61,4 +84,4 @@ function MovieForm(props) {
   );
 }
 
-export default MovieForm;
+export default BookForm;

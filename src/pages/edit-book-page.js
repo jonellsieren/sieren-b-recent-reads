@@ -1,18 +1,18 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
-import EditMovie from "../components/edit-movie";
+import EditBook from "../components/edit-book";
 
-function EditMoviePage() {
+function EditBookPage() {
   const { id } = useParams();
   return (
     <main>
       <Helmet>
         <title>Edit</title>
       </Helmet>
-      <EditMovie id={id} />
+      <EditBook id={id} />
     </main>
   );
 }
 
-export default EditMoviePage;
+export default EditBookPage;

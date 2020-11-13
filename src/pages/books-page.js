@@ -1,16 +1,16 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import MovieListing from "../components/book-listing";
+import BookListing from "../components/book-listing";
 
-function MoviesPage() {
+function BooksPage() {
   return (
     <main>
       <Helmet>
-        <title>Movies</title>
+        <title>Recent Reads</title>
       </Helmet>
-      <MovieListing />
+      <BookListing />
     </main>
   );
 }
 
-export default MoviesPage;
+export default BooksPage;

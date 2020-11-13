@@ -1,16 +1,16 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import AddMovie from "../components/add-book";
+import AddBook from "../components/add-book";
 
-function AddMoviePage() {
+function AddBookPage() {
   return (
     <main>
       <Helmet>
         <title>Add</title>
       </Helmet>
-      <AddMovie />
+      <AddBook />
     </main>
   );
 }
 
-export default AddMoviePage;
+export default AddBookPage;

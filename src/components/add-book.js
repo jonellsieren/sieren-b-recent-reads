@@ -1,22 +1,32 @@
 import React, { useState } from "react";
 import "./add-book.css";
-import MovieForm from "./book-form";
-import { moviesCollection } from "../data/firebase";
+import BookForm from "./book-form";
+import { booksCollection } from "../data/firebase";
 
-function AddMovie() {
+function AddBook() {
   const [isSaving, setIsSaving] = useState(false);
   const [formMessage, setFormMessage] = useState("");
 
-  const onMovieSubmit = async (title, rating, releaseYear) => {
-    // alert(`You want to add ${title}, ${rating}, ${releaseYear}.`);
+  const onBookSubmit = async (
+    title,
+    author,
+    yearPublished,
+    rating,
+    purchaseLink,
+    review
+  ) => {
+    // alert(`You want to add ${title}, ${author), ${yearPublished}, ${rating}, ${purchaseLink}, ${review}.`);
     setIsSaving(true);
     setFormMessage("");
 
     try {
-      await moviesCollection.add({
+      await booksCollection.add({
         title,
+        author,
+        yearPublished,
         rating,
-        releaseYear,
+        purchaseLink,
+        review,
       });
       setFormMessage("Saved successfully!");
       console.log("Saved!");
@@ -31,7 +41,7 @@ function AddMovie() {
     <div className="add-container">
       <h1>Add Movie</h1>
       <MovieForm
-        onSubmit={onMovieSubmit}
+        onSubmit={onBookSubmit}
         isSaving={isSaving}
         message={formMessage}
       />
@@ -39,4 +49,4 @@ function AddMovie() {
   );
 }
 
-export default AddMovie;
+export default AddBook;
