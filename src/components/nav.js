@@ -6,7 +6,7 @@ function Nav() {
   return (
     <nav className="nav">
       <Link className="nav__link" to="/">
-        All Recent Books
+        Your Recent Reads
       </Link>{" "}
       |{" "}
       <Link className="nav__link" to="/add">

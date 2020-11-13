@@ -31,7 +31,7 @@ function BookListing() {
 
   return (
     <div className="books-container">
-      <h1>Books</h1>
+      <h1>RECENT READS</h1>
       {isLoading && (
         <LoadingSpinner
           size="50px"

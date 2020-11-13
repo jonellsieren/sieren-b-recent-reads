@@ -15,7 +15,6 @@ function AddBook() {
     purchaseLink,
     review
   ) => {
-    // alert(`You want to add ${title}, ${author), ${yearPublished}, ${rating}, ${purchaseLink}, ${review}.`);
     setIsSaving(true);
     setFormMessage("");
 

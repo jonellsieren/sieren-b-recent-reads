@@ -2,7 +2,7 @@
   padding: 1.5rem;
   background-color: #fff;
   color: #151116;
-  border-radius: 10px;
+  border-radius: 20px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -15,8 +15,8 @@
   grid-template-columns: auto 1fr;
   min-width: 400px;
   justify-content: center;
-  row-gap: 10px;
-  column-gap: 10px;
+  row-gap: 20px;
+  column-gap: 20px;
   border: none;
 }
 

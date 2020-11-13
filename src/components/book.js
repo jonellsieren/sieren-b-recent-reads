@@ -10,7 +10,7 @@ function Book(props) {
   const { id, data } = props;
   const { title, author, yearPublished, rating, purchaseLink, review } = data;
 
-  const ratingString = "⚪️".repeat(rating) + "⚫️".repeat(5 - rating);
+  const ratingString = "🔸".repeat(rating) + "▫️".repeat(5 - rating);
   const history = useHistory();
   const [isDeleting, setIsDeleting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -39,8 +39,7 @@ function Book(props) {
           <a href={purchaseLink}>Purchase Book</a>{" "}
         </div>
         <div className="book__review">
-          Review:
-          {review ? review : "No review saved."}
+          Review: {review ? review : "No review saved."}
         </div>
         <img src={coverImage} alt="remains of the day cover" width="50" />
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}

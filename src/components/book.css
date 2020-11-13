@@ -1,11 +1,10 @@
 .book {
   padding: 1rem;
-  width: 300px;
+  width: 500px;
   min-height: 175px;
   background-color: #fff;
   color: #151116;
-  border-radius: 10px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -43,11 +42,11 @@
 }
 
 .book__button svg {
-  font-size: 1.25rem;
+  font-size: 2rem;
 }
 
 .book > * {
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.7rem;
 }
 
 .book__title {
@@ -55,5 +54,5 @@
 }
 
 .book__year {
-  font-style: italic;
+  font-style: bold;
 }
