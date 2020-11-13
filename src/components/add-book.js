@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import firebase from "firebase/app";
 import "./add-book.css";
 import BookForm from "./book-form";
 import { booksCollection } from "../data/firebase";
@@ -26,6 +27,7 @@ function AddBook() {
         rating,
         purchaseLink,
         review,
+        createdAt: firebase.firestore.Timestamp.now(),
       });
       setFormMessage("Saved successfully!");
       console.log("Saved!");
