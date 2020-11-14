@@ -5,3 +5,5 @@ import { booksCollection } from "./data/firebase";
 import "./index.css";
 
 ReactDOM.render(<App />, document.getElementById("root"));
+
+console.log(process.env);
