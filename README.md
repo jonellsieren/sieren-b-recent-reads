@@ -13,4 +13,4 @@ The app allows users to log data for a recent book they read. The can edit, dele
 
 ## Final
 
-![](images/imgpsh_mobile_save.jpg)
+![](images/recent_reads.jpg)
