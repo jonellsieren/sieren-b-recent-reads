@@ -1,38 +1,16 @@
 import React, { useState, useEffect } from "react";
-import "./edit-book.css";
+import { booksCollection } from "../data/firebase";
+import useBook from "../hooks/use-book";
 import ErrorMessage from "./error-message";
 import LoadingSpinner from "./loading-spinner";
 import BookForm from "./book-form";
-import { booksCollection } from "../data/firebase";
+import "./edit-book.css";
 
 function EditBook(props) {
   const { id } = props;
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [bookData, setBookData] = useState(null);
+  const [bookData, isLoading, errorMessage] = useBook(id);
   const [isSaving, setIsSaving] = useState(false);
   const [formMessage, setFormMessage] = useState("");
-
-  useEffect(() => {
-    async function getBook() {
-      setIsLoading(true);
-      try {
-        const bookSnapshot = await booksCollection.doc(id).get();
-
-        if (!bookSnapshot.exists) {
-          throw new Error("No such book exists!");
-        }
-        const data = bookSnapshot.data();
-        setBookData(data);
-      } catch (error) {
-        setErrorMessage("Something went wrong. Please try again");
-        console.error(error);
-      }
-      setIsLoading(false);
-    }
-    getBook();
-  }, [id]);
 
   const onBookSubmit = async (
     title,
