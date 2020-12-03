@@ -10,16 +10,21 @@ function useSaveBook() {
     setFormMessage("");
 
     try {
-      await booksCollection.doc(id).set(bookData);
-      setFormMessage("Saved successfully!");
+      if (id === undefined) {
+        await booksCollection.add(bookData);
+      } else {
+        await booksCollection.doc(id).set(bookData);
+      }
+
+      setFormMessage("Saved your book!");
     } catch (error) {
-      setFormMessage(
-        "Something went wrong editing this book. Please try again."
-      );
+      setFormMessage("Something went wrong editing this book.");
       console.error(error);
     }
+
     setIsSaving(false);
   };
+
   return [save, isSaving, formMessage];
 }
 

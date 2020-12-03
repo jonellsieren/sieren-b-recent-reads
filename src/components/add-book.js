@@ -1,14 +1,12 @@
-import React, { useState } from "react";
-import firebase from "firebase/app";
-import "./add-book.css";
+import React from "react";
+import useSaveBook from "../hooks/use-save-book";
 import BookForm from "./book-form";
-import { booksCollection } from "../data/firebase";
+import "./add-book.css";
 
 function AddBook() {
-  const [isSaving, setIsSaving] = useState(false);
-  const [formMessage, setFormMessage] = useState("");
+  const [save, isSaving, formMessage] = useSaveBook();
 
-  const onBookSubmit = async (
+  const onBookSumbit = async (
     title,
     author,
     yearPublished,
@@ -16,33 +14,14 @@ function AddBook() {
     purchaseLink,
     review
   ) => {
-    setIsSaving(true);
-    setFormMessage("");
-
-    try {
-      await booksCollection.add({
-        title,
-        author,
-        yearPublished,
-        rating,
-        purchaseLink,
-        review,
-        createdAt: firebase.firestore.Timestamp.now(),
-      });
-      setFormMessage("Saved successfully!");
-      console.log("Saved!");
-    } catch (error) {
-      setFormMessage("Something went wrong. Pleaase try again!");
-      console.error(error);
-    }
-
-    setIsSaving(false);
+    save({ title, author, yearPublished, rating, purchaseLink, review });
   };
+
   return (
     <div className="add-container">
       <h1>Add Book</h1>
       <BookForm
-        onSubmit={onBookSubmit}
+        onSubmit={onBookSumbit}
         isSaving={isSaving}
         message={formMessage}
       />
