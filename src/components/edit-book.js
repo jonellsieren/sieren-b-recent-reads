@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { booksCollection } from "../data/firebase";
 import useBook from "../hooks/use-book";
+import useSaveBook from "../hooks/use-save-book";
 import ErrorMessage from "./error-message";
 import LoadingSpinner from "./loading-spinner";
 import BookForm from "./book-form";
@@ -9,8 +10,8 @@ import "./edit-book.css";
 function EditBook(props) {
   const { id } = props;
   const [bookData, isLoading, errorMessage] = useBook(id);
-  const [isSaving, setIsSaving] = useState(false);
-  const [formMessage, setFormMessage] = useState("");
+
+  const [save, isSaving, formMessage] = useSaveBook();
 
   const onBookSubmit = async (
     title,
@@ -20,25 +21,7 @@ function EditBook(props) {
     purchaseLink,
     review
   ) => {
-    setIsSaving(true);
-    setFormMessage("");
-    try {
-      await booksCollection.doc(id).set({
-        title,
-        author,
-        yearPublished,
-        rating,
-        purchaseLink,
-        review,
-      });
-      setFormMessage("Saved successfully!");
-    } catch (error) {
-      setFormMessage(
-        "Something went wrong editing this book. Please try again."
-      );
-      console.error(error);
-    }
-    setIsSaving(false);
+    save({ title, author, yearPublished, rating, purchaseLink, review }, id);
   };
 
   return (
