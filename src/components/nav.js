@@ -2,14 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./nav.css";
 
-function Nav() {
+function Nav(props) {
   return (
     <nav className="nav">
       <Link className="nav__link" to="/account">
-        Login
+        {props.user ? "Account" : "Login"}
       </Link>{" "}
+      |{" "}
       <Link className="nav__link" to="/">
-        Your Recent Reads
+        All Books
       </Link>{" "}
       |{" "}
       <Link className="nav__link" to="/add">
