@@ -5,8 +5,9 @@ import useAllBooks from "../hooks/use-all-books";
 import Book from "./book";
 import "./book-listing.css";
 
-function BookListing() {
-  const [books, isLoading, errorMessage] = useAllBooks();
+function BookListing(props) {
+  const userId = props.user.uid;
+  const [books, isLoading, errorMessage] = useAllBooks(userId);
   return (
     <div className="books-container">
       <h1>RECENT READS</h1>
