@@ -37,15 +37,15 @@ function App() {
         </Route>
 
         <AuthenticatedRoute path="/" exact isAuthenticated={isAuthenticated}>
-          <BooksPage />
+          <BooksPage user={user} />
         </AuthenticatedRoute>
 
         <AuthenticatedRoute path="/add" isAuthenticated={isAuthenticated}>
-          <AddBookPage />
+          <AddBookPage user={user} />
         </AuthenticatedRoute>
 
         <AuthenticatedRoute path="/edit/:id" isAuthenticated={isAuthenticated}>
-          <EditBookPage />
+          <EditBookPage user={user} />
         </AuthenticatedRoute>
 
         <Route path="*">

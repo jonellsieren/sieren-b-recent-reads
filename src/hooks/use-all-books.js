@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
-import { booksCollection } from "../data/firebase";
+import { usersCollection } from "../data/firebase";
 
-function useAllBooks() {
+function useAllBooks(userId) {
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     setIsLoading(true);
+
     const onNext = (snapshot) => {
       setIsLoading(false);
       const docs = snapshot.docs;
@@ -21,9 +22,12 @@ function useAllBooks() {
       console.error(error);
     };
 
-    const unsubscribe = booksCollection
+    const unsubscribe = usersCollection
+      .doc(userId)
+      .collection("books")
       .orderBy("rating", "desc")
       .onSnapshot(onNext, onError);
+
     return unsubscribe;
   }, []);
 

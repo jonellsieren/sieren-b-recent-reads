@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { booksCollection } from "../data/firebase";
+import { usersCollection } from "../data/firebase";
 
-function useBook(id) {
+function useBook(userId, bookId) {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [bookData, setBookData] = useState(null);
@@ -10,7 +10,11 @@ function useBook(id) {
     async function getBook() {
       setIsLoading(true);
       try {
-        const bookSnapshot = await booksCollection.doc(id).get();
+        const bookSnapshot = await usersCollection
+          .doc(userId)
+          .collection("books")
+          .doc(bookId)
+          .get();
 
         if (!bookSnapshot.exists) {
           throw new Error("No such book exists!");
@@ -23,9 +27,10 @@ function useBook(id) {
       }
       setIsLoading(false);
     }
-    getBook();
-  }, [id]);
 
+    getBook();
+  }, [bookId]);
   return [bookData, isLoading, errorMessage];
 }
+
 export default useBook;

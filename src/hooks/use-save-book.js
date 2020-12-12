@@ -1,19 +1,23 @@
 import { useState } from "react";
-import { booksCollection } from "../data/firebase";
+import { usersCollection } from "../data/firebase";
 
 function useSaveBook() {
   const [isSaving, setIsSaving] = useState(false);
   const [formMessage, setFormMessage] = useState("");
 
-  const save = async (bookData, id) => {
+  const save = async (bookData, userId, bookId) => {
     setIsSaving(true);
     setFormMessage("");
 
     try {
-      if (id === undefined) {
-        await booksCollection.add(bookData);
+      if (bookId === undefined) {
+        await usersCollection.doc(userId).collection("books").add(bookData);
       } else {
-        await booksCollection.doc(id).set(bookData);
+        await usersCollection
+          .doc(userId)
+          .collection("books")
+          .doc(bookId)
+          .set(bookData);
       }
 
       setFormMessage("Saved your book!");

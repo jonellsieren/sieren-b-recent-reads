@@ -27,7 +27,7 @@ function BookListing(props) {
           const bookData = bookDoc.data();
           return (
             <li key={bookId}>
-              <Book id={bookId} data={bookData} />
+              <Book id={bookId} data={bookData} userId={userId} />
             </li>
           );
         })}

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { booksCollection } from "../data/firebase";
+import React from "react";
 import useBook from "../hooks/use-book";
 import useSaveBook from "../hooks/use-save-book";
 import ErrorMessage from "./error-message";
@@ -8,9 +7,9 @@ import BookForm from "./book-form";
 import "./edit-book.css";
 
 function EditBook(props) {
-  const { id } = props;
-  const [bookData, isLoading, errorMessage] = useBook(id);
-
+  const bookId = props.id;
+  const userId = props.user.uid;
+  const [bookData, isLoading, errorMessage] = useBook(userId, bookId);
   const [save, isSaving, formMessage] = useSaveBook();
 
   const onBookSubmit = async (
@@ -21,7 +20,11 @@ function EditBook(props) {
     purchaseLink,
     review
   ) => {
-    save({ title, author, yearPublished, rating, purchaseLink, review }, id);
+    save(
+      { title, author, yearPublished, rating, purchaseLink, review },
+      userId,
+      bookId
+    );
   };
 
   return (

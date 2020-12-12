@@ -3,7 +3,8 @@ import useSaveBook from "../hooks/use-save-book";
 import BookForm from "./book-form";
 import "./add-book.css";
 
-function AddBook() {
+function AddBook(props) {
+  const userId = props.user.uid;
   const [save, isSaving, formMessage] = useSaveBook();
 
   const onBookSumbit = async (
@@ -14,7 +15,10 @@ function AddBook() {
     purchaseLink,
     review
   ) => {
-    save({ title, author, yearPublished, rating, purchaseLink, review });
+    save(
+      { title, author, yearPublished, rating, purchaseLink, review },
+      userId
+    );
   };
 
   return (
