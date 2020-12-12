@@ -1,33 +1,52 @@
-import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import AddBookPage from "../pages/add-book-page";
 import EditBookPage from "../pages/edit-book-page";
 import AccountPage from "../pages/account-page";
 import BooksPage from "../pages/books-page";
 import NotFoundPage from "../pages/not-found-page";
+import { auth } from "../data/firebase";
 import Nav from "./nav";
 
+function AuthenticatedRoute(props) {
+  const { isAuthenticated, children, ...routeProps } = props;
+  return (
+    <Route {...routeProps}>
+      {isAuthenticated ? children : <Redirect to="/account" />}
+    </Route>
+  );
+}
+
 function App() {
+  const [user, setUser] = useState(null);
+  const isAuthenticated = user !== null;
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      setUser(currentUser);
+    });
+    return unsubscribe;
+  }, []);
   return (
     <BrowserRouter>
-      <Nav />
+      <Nav user={user} />
 
       <Switch>
         <Route path="/account">
-          <AccountPage />
+          <AccountPage user={user} />
         </Route>
 
-        <Route path="/" exact>
+        <AuthenticatedRoute path="/" exact isAuthenticated={isAuthenticated}>
           <BooksPage />
-        </Route>
+        </AuthenticatedRoute>
 
-        <Route path="/add">
+        <AuthenticatedRoute path="/add" isAuthenticated={isAuthenticated}>
           <AddBookPage />
-        </Route>
+        </AuthenticatedRoute>
 
-        <Route path="/edit/:id">
+        <AuthenticatedRoute path="/edit/:id" isAuthenticated={isAuthenticated}>
           <EditBookPage />
-        </Route>
+        </AuthenticatedRoute>
 
         <Route path="*">
           <NotFoundPage />

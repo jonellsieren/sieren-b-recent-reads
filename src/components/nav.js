@@ -6,7 +6,7 @@ function Nav() {
   return (
     <nav className="nav">
       <Link className="nav__link" to="/account">
-        User Login
+        Login
       </Link>{" "}
       <Link className="nav__link" to="/">
         Your Recent Reads

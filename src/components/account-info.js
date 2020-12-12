@@ -70,7 +70,7 @@ function AccountInfo(props) {
     <div className="account-container">
       <h1>Account Info</h1>
       <div className="login-form">
-        <h2>Social Login</h2>
+        <h2>Google Login</h2>
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         {contents}
       </div>
