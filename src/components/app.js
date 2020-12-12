@@ -12,6 +12,10 @@ function App() {
       <Nav />
 
       <Switch>
+        <Route path="/account">
+          <AccountPage />
+        </Route>
+
         <Route path="/" exact>
           <BooksPage />
         </Route>
