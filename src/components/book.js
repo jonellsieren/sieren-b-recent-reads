@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { Delete, Edit } from "@material-ui/icons";
 import { useHistory } from "react-router-dom";
 import ErrorMessage from "./error-message";
-import { booksCollection } from "../data/firebase";
+import { usersCollection } from "../data/firebase";
 import "./book.css";
 import coverImage from "../images/book_sample.jpg";
 
 function Book(props) {
-  const { id, data } = props;
+  const { id, data, userId } = props;
   const { title, author, yearPublished, rating, purchaseLink, review } = data;
 
   const ratingString = "🔸".repeat(rating) + "▫️".repeat(5 - rating);
@@ -19,11 +19,11 @@ function Book(props) {
     setIsDeleting(true);
     setErrorMessage("");
     try {
-      const docRef = booksCollection.doc(id);
+      const docRef = usersCollection.doc(userId).collection("books").doc(id);
       await docRef.delete();
     } catch (error) {
       console.error(error);
-      setErrorMessage("Something went wrong. Please try again.");
+      setErrorMessage("Oh no! Something happened! Please try again.");
       setIsDeleting(false);
     }
   };
