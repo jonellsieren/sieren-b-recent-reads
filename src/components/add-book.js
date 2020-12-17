@@ -1,4 +1,5 @@
 import React from "react";
+import { firebase } from "../data/firebase.js";
 import useSaveBook from "../hooks/use-save-book";
 import BookForm from "./book-form";
 import "./add-book.css";
@@ -16,7 +17,15 @@ function AddBook(props) {
     review
   ) => {
     save(
-      { title, author, yearPublished, rating, purchaseLink, review },
+      {
+        title,
+        author,
+        yearPublished,
+        rating,
+        purchaseLink,
+        review,
+        editedAt: firebase.firestore.Timestamp.now(),
+      },
       userId
     );
   };

@@ -1,4 +1,5 @@
 import React from "react";
+import { firebase } from "../data/firebase.js";
 import useBook from "../hooks/use-book";
 import useSaveBook from "../hooks/use-save-book";
 import ErrorMessage from "./error-message";
@@ -21,7 +22,15 @@ function EditBook(props) {
     review
   ) => {
     save(
-      { title, author, yearPublished, rating, purchaseLink, review },
+      {
+        title,
+        author,
+        yearPublished,
+        rating,
+        purchaseLink,
+        review,
+        editedAt: firebase.firestore.Timestamp.now(),
+      },
       userId,
       bookId
     );

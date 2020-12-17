@@ -8,7 +8,16 @@ import coverImage from "../images/book_sample.jpg";
 
 function Book(props) {
   const { id, data, userId } = props;
-  const { title, author, yearPublished, rating, purchaseLink, review } = data;
+  const {
+    title,
+    author,
+    yearPublished,
+    rating,
+    purchaseLink,
+    review,
+    editedAt,
+  } = data;
+  console.log(editedAt.toDate());
 
   const ratingString = "🔸".repeat(rating) + "▫️".repeat(5 - rating);
   const history = useHistory();
@@ -44,7 +53,7 @@ function Book(props) {
         <img src={coverImage} alt="remains of the day cover" width="50" />
         <div className="book__date">
           Book added:
-          {Date.now()}
+          {editedAt.toDate().toDateString()}
         </div>
 
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
