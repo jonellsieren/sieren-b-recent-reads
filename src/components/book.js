@@ -50,7 +50,7 @@ function Book(props) {
         <div className="book__review">
           Review: {review ? review : "No review saved."}
         </div>
-        <img src={coverImage} alt="remains of the day cover" width="50" />
+        <img src={coverImage} alt="sample image" width="50" />
         <div className="book__date">
           Book added:
           {editedAt.toDate().toDateString()}
