@@ -74,7 +74,6 @@ function AccountInfo(props) {
   }
   //
   const { initialState = {}, message, isSaving, onUserSubmit } = props;
-
   const [nickname, setNickname] = useState(initialState.nickname);
   const [userBio, setUserBio] = useState(initialState.userBio);
 
@@ -122,6 +121,9 @@ function AccountInfo(props) {
             type="submit"
             value={isSaving ? "Saving..." : "Save"}
           />
+          <p>
+            Nickname:{nickname} Bio: {userBio}
+          </p>
         </fieldset>
       </form>
     </div>
